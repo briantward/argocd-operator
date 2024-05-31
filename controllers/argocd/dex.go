@@ -148,7 +148,8 @@ func (r *ReconcileArgoCD) getOpenShiftDexConfig(cr *argoproj.ArgoCD) (string, er
 			"clientID":     getDexOAuthClientID(cr),
 			"clientSecret": "$oidc.dex.clientSecret",
 			"redirectURI":  r.getDexOAuthRedirectURI(cr),
-			"insecureCA":   true, // TODO: Configure for openshift CA,
+			"insecureCA":   false,
+			"rootCA":       "/run/secrets/kubernetes.io/serviceaccount/ca.crt",
 			"groups":       groups,
 		},
 	}
